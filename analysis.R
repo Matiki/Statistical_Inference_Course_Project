@@ -40,8 +40,23 @@ str(ToothGrowth)
 head(ToothGrowth)
 summary(ToothGrowth)
 
-# make plot comparing Tooth length over different supplements and doses 
+# Make plot comparing Tooth length over different supplements and doses 
 ggplot(ToothGrowth, aes(x = dose, y = len)) + geom_point(aes(col = supp))
 
 # Check to see if data appear normally distributed
 ggplot(ToothGrowth, aes(len)) + geom_histogram()
+
+# Check for equal variance accross supplement types
+ToothGrowth %>% group_by(supp) %>%
+        summarise(variance = var(len))
+
+# Check for eaual variance accross dose amounts
+ToothGrowth %>% group_by(dose) %>%
+        summarise(variance = var(len))
+
+# Conduct T test to compare supplement types
+t.test(data = ToothGrowth, len ~ supp, paired = F, var.equal = F)
+
+# Conduct T test to compare dose amounts (0.5 vs 2.0)
+t.test(data = filter(ToothGrowth, dose != 1.0),
+       len ~ as.numeric(dose), paired = F, var.equal = F)
