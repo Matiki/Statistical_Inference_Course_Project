@@ -9,9 +9,7 @@ output:
     keep_tex: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ## Overview
 We will be investigating the exponential distribution and comparing it to the 
@@ -24,7 +22,8 @@ The code below sets the seed (to 42), then initializes all variables, and finall
 computes the mean of 40 exponentials, 1000 times, storing them in a vector. We 
 will set lambda equal to 0.2.
 
-```{r}
+
+```r
 # Set seed
 set.seed(42)
 
@@ -45,9 +44,14 @@ that equals 5. We also know that the sample mean is the same as the population
 mean, so if we take the mean of our computed means of 40 exponentials from 
 before, we should be able to approximate the population mean of 5.
 
-```{r}
+
+```r
 # Compare sample mean to theoretical (1/lambda = 5)
 mean(exp_sim)
+```
+
+```
+## [1] 4.986508
 ```
 
 We can see that in fact, our computed value is very close to the population mean,
@@ -59,9 +63,14 @@ same, 1/lambda, or 5 in our case. Since the standard error of the sample mean is
 sigma/sqrt(n), we can multiply the standard error by sqrt(n) to estimate the 
 popultion standard deviation, which we do below.
 
-```{r}
+
+```r
 # Compare sample variance to theoretical (1/lambda = 5)
 sd(exp_sim) * sqrt(n)
+```
+
+```
+## [1] 5.037621
 ```
 
 We can see again that this provides a good approximation of the population 
@@ -75,10 +84,17 @@ as the sample size increases. Our second plot demonstrates this. We simply plot
 a histogram of the sample means and can see that its shape appears approximately
 normal.
 
-```{r}
+
+```r
 # Histogram showing distrubution of 1000 random exponential variables
 hist(rexp(1000, lambda))
+```
 
+![](exponential_simulation_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+
+```r
 # Histogram showing distribtution of 1000 averages of 40 exponential variables 
 hist(exp_sim)
 ```
+
+![](exponential_simulation_files/figure-html/unnamed-chunk-4-2.png)<!-- -->
