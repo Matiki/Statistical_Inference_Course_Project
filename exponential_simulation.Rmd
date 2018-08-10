@@ -1,0 +1,61 @@
+---
+title: "Exponential Simulation"
+author: "Matiki"
+date: "August 9, 2018"
+output: 
+  html_document: 
+    keep_md: yes
+  pdf_document: 
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+We will be investigating the exponential distribution and comparing it to the 
+Central Limit Theorem. We will do 1000 simulations of 40 exponentials, and look 
+at the distribution of means, as well as the sample variance, and compare them 
+to the theoretical mean and variance.
+
+### Exponential Simulation
+
+```{r}
+# Set seed
+set.seed(42)
+
+# 1000 simulations of 40 exponential random variables
+exp_sim <- NULL
+num_sims <- 1000
+n <- 40
+lambda <- 0.2
+
+for (i in 1 : num_sims){
+        exp_sim <- c(exp_sim, mean(rexp(n, lambda)))
+}
+```
+
+### Sample Mean vs Theoretical Mean
+
+```{r}
+# Compare sample mean to theoretical (1/lambda = 5)
+mean(exp_sim)
+```
+
+### Sample Variance vs Theoretical Variance
+
+```{r}
+# Compare sample variance to theoretical (1/lambda = 5)
+sd(exp_sim) * sqrt(n)
+```
+
+### Distribution
+
+```{r}
+# Histogram showing distrubution of 1000 random exponential variables
+hist(rexp(1000, lambda))
+
+# Histogram showing distribtution of 1000 averages of 40 exponential variables 
+hist(exp_sim)
+```

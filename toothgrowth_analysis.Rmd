@@ -1,37 +1,37 @@
+---
+title: "Analysis of Tooth Growth Data"
+author: "Matiki"
+date: "August 9, 2018"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Overview
+We will be analyzing the ToothGrowth data from the R datasets package. The data 
+set contains measurements of lengths of cells associated with tooth growth in 60
+ginuea pigs. Each animal recieved one of three dose levels of vitamin C, via 
+either orange juice or ascorbic acid. We will investigate which dose levels and 
+delivery types are associated with tooth growth.
+
+### Exploratory Analysis
+
+
+### Comparing Tooth Growth by supp and dose
+
+### Conclusion
+
+### Appendix
+```{r, eval=FALSE}
 # Load necessary R packages
 library(dplyr)
 library(ggplot2)
-
-# Set seed
-set.seed(42)
-
-# 1000 simulations of 40 exponential random variables
-exp_sim <- NULL
-num_sims <- 1000
-n <- 40
-lambda <- 0.2
-
-for (i in 1 : num_sims){
-        exp_sim <- c(exp_sim, mean(rexp(n, lambda)))
-}
-
-
-# Compare sample mean to theoretical (1/lambda = 5)
-mean(exp_sim)
-
-# Compare sample variance to theoretical (1/lambda = 5)
-sd(exp_sim) * sqrt(n)
-
-# Histogram showing distrubution of 1000 random exponential variables
-hist(rexp(1000, lambda))
-
-# Histogram showing distribtution of 1000 averages of 40 exponential variables 
-hist(exp_sim)
-
-
-###########
-## Part 2##
-###########
 
 # Load data and conduct simple exploratory analysis
 data("ToothGrowth")
@@ -64,3 +64,4 @@ t.test(data = ToothGrowth, len ~ supp, paired = F, var.equal = F)
 # Conduct T test to compare supp types at dose = 0.5
 t.test(data = filter(ToothGrowth, dose == 0.5),
        len ~ supp, paired = F, var.equal = F)
+```
